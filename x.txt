@@ -1,0 +1,11 @@
+https://www.geloratekno.com/2020/02/cara-mengupload-file-ke-github.html
+
+git init
+git status
+
+git init
+git add .
+git status
+git commit -m "Commit pertama" 
+git remote add github https://github.com/laoshee/ci.git
+git push github master

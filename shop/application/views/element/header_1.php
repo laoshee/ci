@@ -13,7 +13,9 @@
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/easing.js"></script> 
     <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.1/css/select2.min.css">
+    <link href="<?php echo base_url() ?>assets/web/css/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.1/css/select2.min.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.1/js/select2.min.js"></script>
     <title>ONLINE SHOP</title>
 </head>

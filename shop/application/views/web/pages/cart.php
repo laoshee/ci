@@ -49,6 +49,9 @@
                             <td style="display:none"><input type="text" name="<?=$i.'[rowid]';?>" id="rowid" value="<?php echo $cart_items['rowid'] ?>"hidden /></td>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $cart_items['name'] ?></td> <!---$cart_items['name']  dari library yen sko db jeneng e product_title-->
+                            <td style="display:none"><input type="text" id="totberat" value="<?php echo $cart_items['options']['p_weight']?>" hidden/></td>
+                            <td style="display:none"><input type="text" id="berat_satuan" value="<?php echo $cart_items['options']['p_beratsatuan']?>" hidden/></td>
+                            <td style="display:none"><input type="text" id="product_id" value="<?php echo $cart_items['id']?>"hidden /></td>
                             <td style="width:100px"><img class="responsive-img" src="<?php echo base_url('assets/uploads/' . $cart_items['options']['product_image']) ?>" alt="" style="width:75%"/></td>
                             <td>Rp. 
                             <!-- <span id="amount1"  oninput="calc(this)"class="amount"> -->
@@ -79,10 +82,11 @@
             <div class="col s6 m6 l6 offset-s6 offset-m6 offset-l6">
                 <table style="float:right;text-align:left;" width="40%">
                     <tr>
-                        <th>Sub Total : </th>
+                        <!-- <th>Sub Total : </th> -->
+                        <th>Grand Total : </th>
                         <td>Rp. <?php echo $this->cart->format_number($this->cart->total()) ?></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <th>TAX : </th>
                         <td>Rp. 
                             <?php
@@ -95,7 +99,7 @@
                     <tr>
                         <th>Grand Total :</th>
                         <td>Rp. <?php echo $this->cart->format_number($tax + $this->cart->total()); ?> </td>
-                    </tr>
+                    </tr> -->
                 </table>
             </div>
         </div>

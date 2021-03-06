@@ -236,12 +236,17 @@
         })
 
 
-        // document.getElementById("tombol_ambilongkir");
-        // addEventListener("click", tampilkan_nilai_form);
+        document.getElementById("tombol_ambilongkir");
+        addEventListener("click", tampilkan_nilai_form);
         function tampilkan_nilai_form(){
             var nilai_form = document.getElementById('input_ongkir').value;
             document.getElementById("hasil_ongkir").value=nilai_form;
         }
+
+        $('select').formSelect();
+        // $("select").material_select(); 
+
+        
 
     }); //PENUTUP DOCUMENT
 </script>
@@ -268,24 +273,27 @@
     $('.itemQty').change(function(){
         var el= $(this).closest('tr');
         var id = $(el).find('#rowid').val();
+        var a = $(el).find('#totberat').val();
+        var b = $(el).find('#berat_satuan').val();
+        // var c = $(el).find('#product_id').val();
         var qty = $(this).val();
         $.ajax({
             url  : "<?php echo base_url('web/update_cart')?>",
             // url : "<?php echo base_url();?>web/update_cart",
             dataType : "JSON",
             type : "POST",
-            data : {id:id,qty:qty},
+            data : {idrow:id,qty:qty,totberat:a,berat_satuan:b},
             beforeSend: function () {
         		$('.loading').show();
 			},
 			complete: function(){
 				$(".loading").hide();
 			},
-			error: function (request, error) {
-					console.log(query);
-					//alert(" Can't do because: " + error + request);
+			error: function (request, error,idrow) {
+					console.log(request);
+					alert(" Can't do because: " + error + request + c+ a+ b);
 				},
-            success :function(result,html){
+            success :function(result,html,respons){
                 window.location.href='';
                 // $('.onload_cart').load('web/cart_autoqty');           
 
@@ -295,6 +303,7 @@
                 // console.log(ambil);
                 // // console.log(data);
                 console.log(result);
+                console.log(respons);
                 // $('#total').val(result);
                 
                 // $('#card_load').load("<?php echo base_url();?>cart");
@@ -371,27 +380,286 @@
                     },
                     success: function(result) {
                         console.log(result);
-                        var links = document.getElementsByTagName("loading"),
-                            i = 0,
-                            l = links.length,
-                            body = document.body;
-                            // Swal.fire( 'Good job!', 'You clicked the button!', 'success' )
-                            window.location.href = '';
-                            for (; i < l; i++) {
-                                links[i].addEventListener("click", function() {
-                                    body.className = "loading";
-                                    setTimeout(function() {
-                                        body.className = "";
-                                    }, 3000);
-                                }, false);
-                            }
+                        // var links = document.getElementsByTagName("loading"),
+                        //     i = 0,
+                        //     l = links.length,
+                        //     body = document.body;
+                        //     // Swal.fire( 'Good job!', 'You clicked the button!', 'success' )
+                        //     window.location.href = '';
+                        //     for (; i < l; i++) {
+                        //         links[i].addEventListener("click", function() {
+                        //             body.className = "loading";
+                        //             setTimeout(function() {
+                        //                 body.className = "";
+                        //             }, 3000);
+                        //         }, false);
+                        //     }
 
                     },
                     });   
             }
         })
         // }); //penutup
-    }
+        }
+
+    // $(function(){
+	// 	$.ajaxSetup({
+	// 		type:"POST",
+	// 		url: "<?php echo site_url('kota/get_kota/kotaasal') ?>",
+	// 		cache: false,
+	// 	});
+
+        // $(".kota_asal").change(function(){
+        //     var id = $(this).find(':selected')[0].id;
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+        //         // data: {
+        //         //     'id': id
+        //         // },
+		// 	// var value=$(this).val();
+		// 		// if(value>0){
+		// 			// $.ajax({
+        //             // type: "GET",
+        //             // dataType: "html",
+        //             // url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+		// 			// data:{modul:'kabupaten',kab_ambil:value},
+        //             error:function(e){
+        //                 console.log(e);
+        //             },
+		// 			success: function(data){
+		// 			// $("select#kota_asal").html(respond);
+        //             $('select#kota_asal').html('');
+        //             for (var i = 0; i < jsonObj.length; i++) {
+        //                 $("<option />").val(jsonObj[i].code)
+        //                 .text(jsonObj[i].name)
+        //                 .appendTo($('select#kota_asal'));
+        //             }
+        //             console.log(msg);
+		// 		}
+		// 	})
+		// // }
+
+		// });
+
+        // $.ajax({
+        //     type: "GET",
+        //     dataType: "html",
+        //     url: "<?php echo site_url(''); ?>",
+        //     success: function (msg) {
+        //         $("select#kota_asal").html(msg);
+        //     }
+        // }); 
+		// $("#kabupaten-kota").change(function(){
+		// 	var value=$(this).val();
+		// 		if(value>0){
+		// 			$.ajax({
+		// 			data:{modul:'kecamatan',id:value},
+		// 			success: function(respond){
+		// 			$("#kecamatan").html(respond);
+		// 		}
+		// 	})
+		// }
+		// })
+
+		// $("#kecamatan").change(function(){
+		// 	var value=$(this).val();
+		// 		if(value>0){
+		// 			$.ajax({
+		// 			data:{modul:'kelurahan',id:value},
+		// 			success: function(respond){
+		// 			$("#kelurahan-desa").html(respond);
+		// 		}
+		// 	})
+		// } 
+		// })
+
+    // })
+    
+    // $("#kota_asalnya").click(function(){
+        $('#id_provinsi').select2({
+            placeholder: '--Pilih provinsi--',
+            language: "id"
+        });
+
+        $('#kota_asalnya').select2({
+            placeholder: '',
+            language: "id"
+        });
+
+        // $('#kota_asalnya').select2({
+        //     placeholder: '--Pilih kota/kabupaten asal--',
+        //     language: "id"
+        // });
+        $('#kota_asalnya').chips({
+            placeholder: 'Enter a tag',
+        });
+
+        $.ajax({
+            type: "GET",
+            dataType: "html",
+            url: "<?php echo site_url('kota/get_kota/province'); ?>",
+            success: function (msg) {
+                $("select#id_provinsi").html(msg);
+            }
+        }); 
+
+        $("#id_provinsi").change(function(){
+            var value=$(this).val();
+            var datax = $('#id_provinsi').val();
+                if(value>0){
+                    $.ajax({
+                        // url: "<?php echo site_url('kota/kota'); ?>",
+                        url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+                        dataType : "html",
+                        type : "POST",
+                    // type: "GET",
+                    // dataType: "html",
+                    data:{ambil:datax},
+                    error: function (xhr, ajaxOptions, thrownError,value) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        console.log(datax);
+                        console.log(value);
+                    },
+                    success: function(msg,value,e,xhr,responseText){
+                        $("select#kota_asalnya").html(msg);
+                        console.log(msg);
+                        console.log(value);
+                        console.log(xhr,responseText);
+                }
+                })
+            }
+        });
+
+        $("#id_provinsi").change(function(){
+            var value=$(this).val();
+            var datax = $('#id_provinsi').val();
+                if(value>0){
+                    $.ajax({
+                        url: "<?php echo site_url('kota/get_kota/get_province'); ?>",
+                        dataType : "html",
+                        type : "POST",
+                    data:{ambil:value},
+                    error: function (xhr, ajaxOptions, thrownError,value) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        console.log(datax);
+                        console.log(value);
+                    },
+                    success: function(msg,value,e,xhr,responseText,datax){
+                        $("#id_ambilprovinsi").val(msg);
+                    }
+                })
+            }
+        });
+
+        $("#kota_asalnya").change(function(){
+            var value=$(this).val();
+            var datax = $('#kota_asalnya').val();
+                if(value>0){
+                    $.ajax({
+                        url: "<?php echo site_url('kota/get_kota/get_city'); ?>",
+                        dataType : "html",
+                        type : "POST",
+                    data:{ambil:value},
+                    error: function (xhr, ajaxOptions, thrownError,value) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        console.log(datax);
+                        console.log(value);
+                    },
+                    success: function(msg,value,e,xhr,responseText,datax){
+                        $("#id_ambilkota").val(msg);
+                    }
+                })
+            }
+        });
+
+        // $.ajax({
+        //     type: "GET",
+        //     dataType: "html",
+        //     url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+        //     success: function (msg) {
+        //         $("select#kota_asalnya").html(msg);
+        //     }
+        // });    
+
+           
+
+        // $(document).on('change','#kota_asalnya', function(){
+        //     // $('input.autocomplete').autocomplete({
+        //     // data: {
+        //     //     "Apple": null,
+        //     //     "Microsoft": null,
+        //     //     "aaab": 'null',
+        //     //     "Google": 'https://placehold.it/250x250'
+        //     // },
+        //     // });
+                
+        //     // function tampilkan_kotaasal(){
+        //     console.log('cek');
+        //     var idkey ='53341588ddd45a3a026d55d75738286b'
+        //     // $.ajax({
+        //     //     type: "GET",
+        //     //     dataType: "html",
+        //     //     crossDomain: true,
+        //     //     url: "http://api.rajaongkir.com/starter/city",
+        //     //     beforeSend: function(xhr) {
+        //     //         xhr.setRequestHeader('key', idkey);
+        //     //         console.log(xhr);
+        //     //     },
+        //     //     error: function(msg,data){
+        //     //         console.log(data);
+        //     //     },
+        //     //     success: function (msg,data) {
+        //     //         $("select#kota_asal").html(msg);
+        //     //         console.log(msg,data);
+
+        //     //     }
+        //     // });   
+        //     $.ajax({
+        //     type: "GET",
+        //     dataType: "html",
+        //     url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+        //     error: function(msg,data){
+        //         console.log(data);
+        //     },
+        //     success: function (hasil) {
+        //         // var html = '';
+        //         // var i;
+        //         // for(i=0; i<data.length; i++)
+        //         //     html += "<option value=" + $data['rajaongkir']['results'][$i]['city_id'] + ">" + $data['rajaongkir']['results'][$i]['city_name'] + "</option>";
+        //         // // }
+        //         // $("#kota_asalnya").html(html);
+        //         $("#kota_asalnya").append(hasil);
+        //         $('select').formSelect();
+
+        //         // $('select#kota_asalnya').append(msg);
+        //         // $('select#kota_asalnya').formSelect()
+        //         // $("#kota_asalnya").append(msg);
+        //         console.log(data);
+        //     }
+        //     }); 
+        // // url:"<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+        // // method:"get",
+        // // dataType:"html",
+        // // success: function(data, msg){
+        // //     var text = "";
+        // //     // text+="<option value=’’> — Select a country — </option>”;
+        // //     // $.each(data, function(key, val){
+        // //     // text+=”<option values=”+val.alpha3Code+”>”+val.name+”</option>”;
+        // //     // });
+        // //     $("select#kota_asal").html(data);
+        // //     console.log(data);
+            
+        // // },
+        // // error: function(msg,data){
+        // //     console.log(data);
+        // // }
+        // // })
+        // }); //penutup
+        // };
 </script>
 </body>
 </html>

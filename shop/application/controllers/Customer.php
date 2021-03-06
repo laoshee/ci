@@ -9,20 +9,30 @@ class Customer extends CI_Controller {
     }
 
     public function shipping_register(){
-        $data['customer_name']     = $this->input->post('customer_name');
-        $data['customer_email']    = $this->input->post('customer_email');
-        $data['customer_password'] = md5($this->input->post('customer_password'));
-        $data['customer_address']  = $this->input->post('customer_address');
-        $data['customer_city']     = $this->input->post('customer_city');
-        $data['customer_phone']    = $this->input->post('customer_phone');
+        $data['customer_name']      = $this->input->post('customer_name');
+        $data['customer_password']  = md5($this->input->post('customer_password'));
+        $data['customer_email']     = $this->input->post('customer_email');
+        $data['customer_address']   = $this->input->post('customer_address');
+        $data['customer_provinsi']  = $this->input->post('ambilprovinsi');
+        $data['customer_kota']      = $this->input->post('ambilkota');
+        $data['kode_provinsi']      = $this->input->post('customer_provinsi');
+        $data['kode_kota']          = $this->input->post('customer_kota_asal');
+        $data['customer_desa']      = $this->input->post('customer_desa');
+        $data['customer_phone']     = $this->input->post('customer_phone');
+        $data['tgl_daftar']         = (date("Y-m-d H:i:s"));
+        $data['customer_active']    = '1';
         
 
-        $this->form_validation->set_rules('customer_name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('customer_email', 'Email', 'trim|required|valid_email|is_unique[t_customer.customer_email]');
+        $this->form_validation->set_rules('customer_name', 'Nama', 'trim|required');
         $this->form_validation->set_rules('customer_password', 'Password', 'trim|required');
-        $this->form_validation->set_rules('customer_address', 'Address', 'trim|required');
-        $this->form_validation->set_rules('customer_city', 'City', 'trim|required');
+        $this->form_validation->set_rules('customer_email', 'Email', 'trim|required|valid_email|is_unique[t_customer.customer_email]');
+        $this->form_validation->set_rules('customer_address', 'Alamat', 'trim|required');
         $this->form_validation->set_rules('customer_phone', 'Phone', 'trim|required');
+        // $this->form_validation->set_rules('ambilprovinsi', 'Password', 'trim|required');
+        // $this->form_validation->set_rules('ambilkota', 'Address', 'trim|required');
+        $this->form_validation->set_rules('customer_provinsi', 'Provinsi', 'trim|required');
+        $this->form_validation->set_rules('customer_kota_asal', 'Kota', 'trim|required');
+        $this->form_validation->set_rules('customer_desa', 'Desa', 'trim|required');
 
         if ($this->form_validation->run() == true) {
             $result = $this->web_model->save_customer($data);
@@ -154,6 +164,7 @@ class Customer extends CI_Controller {
                 $oddata['product_name']           = $oddatas['name'];
                 $oddata['product_price']          = $oddatas['price'];
                 $oddata['product_sales_quantity'] = $oddatas['qty'];
+                $oddata['total_weight']           = $oddatas['options']['p_weight'];
                 $oddata['product_image']          = $oddatas['options']['product_image'];
                 $this->web_model->save_order_details_info($oddata);
             }

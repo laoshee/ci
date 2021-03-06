@@ -6,7 +6,7 @@ class Ongkir extends CI_Controller {
     public function index() {
         $this->load->view('element/header_1');
         $this->load->view('v_ongkir');
-        $this->load->view('element/footer');
+        // $this->load->view('element/footer');
     }
 
     function cek_ongkir() {

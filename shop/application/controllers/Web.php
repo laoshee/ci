@@ -47,12 +47,19 @@ class Web extends CI_Controller {
         $data       = array();
         $product_id = $this->input->post('product_id');
         $results    = $this->web_model->get_product_by_id($product_id);
+        $qty = $this->input->post('qty');
+        $total = $results->product_weight * $qty;
+        $berat = $results->product_weight;
 
         $data['id']      = $results->product_id;
         $data['name']    = $results->product_title;
         $data['price']   = $results->product_price;
-        $data['qty']     = $this->input->post('qty');
-        $data['options'] = array('product_image' => $results->product_image);
+        $data['qty']     = $qty;
+        $data['options'] = array(
+                                'product_image' => $results->product_image,
+                                'p_weight' => $total,
+                                'p_beratsatuan' => $berat
+                            );
 
         $this->cart->insert($data);
         // redirect('cart');
@@ -64,14 +71,29 @@ class Web extends CI_Controller {
         // $data          = array();
         // $data['qty']   = $this->input->post('qty');
         // $data['rowid'] = $this->input->post('rowid');
+        $product_id = $this->input->post('product_id');
+        $results    = $this->web_model->get_product_by_id($product_id);
 
-        $id = $this->input->post('id');
+        $id = $this->input->post('idrow');
         $qty= $this->input->post('qty');
+        $berat= $this->input->post('totberat');
+        $berat_satuan= $this->input->post('berat_satuan');
+        $total = $berat_satuan * $qty;
         $data = array(
             'rowid' => $id,
-            'qty' =>$qty
+            'qty' =>$qty,
         );
-        
+        // $data['rowid']      = $id;
+        // $data['qty']        = $qty;
+        $data['options']['p_weight']   = $total;
+        // $data['options']['a']   = $id;
+        // $data['options']    = array(
+        //                     // 'product_image' => $results->product_image,
+        //                     'p_weight' => $total,
+        //                     'p_beratsatuan' => $berat,
+        //                     'a' => $product_id
+        //                     );
+
         // $total = $this->cart->total_items();
         // $item = $this->input->post('rowid');
         // $qty = $this->input->post('qty');
@@ -82,7 +104,11 @@ class Web extends CI_Controller {
         //     'qty'   => $qty[$i]
         //     );
         //   $cek = 
-        $this->cart->update($data);
+        // $this->cart->update($data);
+        $this->cart->update_options($data);
+        // print_r($this->cart->contents());
+        // var_dump($this->cart->contents());
+
         // }
         // echo $this->cart();
 		//echo json_encode($cek); //dicek sek
@@ -98,7 +124,6 @@ class Web extends CI_Controller {
 
     public function remove_cart()
     {
-
         $data = $this->input->post('rowid');
         $this->cart->remove($data);
         redirect('cart');

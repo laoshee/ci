@@ -4,18 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>assets/materialize/css/materialize.min.css"  media="screen,projection"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/web/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="<?php echo base_url() ?>assets/web/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="<?php echo base_url() ?>asassets/web/css/cdnjs/sweetalert.min.css" rel="stylesheet" type="text/css" media="all"/></script>
+    <link href="<?php echo base_url() ?>assets/web/css/cdnjs/sweetalert.min.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="<?php echo base_url() ?>assets/web/css/select2/select2.min.css" rel="stylesheet" type="text/css"/>
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/> -->
+
+
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/jquery-1.7.2.min.js"></script> 
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/nav.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/move-top.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/easing.js"></script> 
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/select2/select2.min.js"></script> 
     <!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/nav-hover.js"></script> -->
     <script src="<?php echo base_url() ?>assets/web/js/cdnjs/sweetalert2.all.min.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
+
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('/assets/uploads/'); ?><?php echo get_option('site_favicon'); ?>" />
 </head>
 <body >

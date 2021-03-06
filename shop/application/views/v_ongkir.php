@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4">Kota Asal:</label>
                             <div class="col-sm-12">
-                                <select class="form-control" id="kota_asal" name="kota_asal" required="" onchange="tampilkan()">
+                                <select class="form-control" id="kota_asal" name="kota_asal" required="" > <!--onchange="tampilkan()"-->
                                 </select>
                             </div>
                         </div>
@@ -139,6 +139,13 @@
                 }
             });
         });
-
+        
+        document.getElementById("tombol_ambilongkir");
+        addEventListener("click", tampilkan_nilai_form);
+        function tampilkan_nilai_form(){
+            var nilai_form = document.getElementById('input_ongkir').value;
+            document.getElementById("hasil_ongkir").value=nilai_form;
+        }
     });
+    
 </script>

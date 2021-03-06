@@ -6,7 +6,7 @@
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                            <h2>Existing Customers</h2>
+                            <h2>Akun Customers</h2>
 
                             <div class="row">
                                 <blockquote><p class="flow-text red-text"><b><?php echo $this->session->flashdata('messagelogin'); ?></b></p></blockquote>
@@ -48,13 +48,13 @@
         <div class="card horizontal">
             <div class="card-stacked">
                 <div class="card-content">
-                    <h2>Register New Account</h2>
+                    <h2>Registrasi Akun</h2>
                     <div class="row">
                         <blockquote><p class="flow-text red-text"><b><?php echo $this->session->flashdata('messageregister'); ?></b></p></blockquote>
                         <form class="col s12" method="post" action="<?php echo base_url('customer/shipping_register');?>">
                             <div class="row">
                                 <div class="col s12">
-                                    Your NickName:
+                                    Nama Anda:
                                     <div class="input-field input-field col s12">
                                         <input type="text" name="customer_name" class="validate" onfocus="this.value = '';" onblur="if (this.value == '') {
                                                 this.value = 'customer_name';
@@ -79,22 +79,58 @@
                                     </div>                            
                                 </div>                             
                             </div>      
-                            <div class="row">
+                            <div class="row" >
                                 <div class="col s12">
-                                    Address:
+                                    Alamat:
                                     <div class="input-field col s12">
                                         <input type="text" name="customer_address" class="validate">
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="row" hidden>
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="id_ambilprovinsi" name="ambilprovinsi">
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="row" hidden>
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="id_ambilkota" name="ambilkota">
                                     </div>
                                 </div>
                             </div>    
                             <div class="row">
                                 <div class="col s12">
-                                    City:
+                                    Provinsi:
                                     <div class="input-field col s12">
-                                        <input type="text" name="customer_city" class="validate">
+                                    <!-- <input type="text" id="autocomplete-input" class="autocomplete"> -->
+                                    <select id="id_provinsi" name="customer_provinsi" required="" class="browser-default" placeholder="pilih provinsi"> <!-- onchange="tampilkan_kotaasal()"-->
+                                        <option value="" disabled selected>Pilih Provinsi</option>
+                                    </select>
+                                        <!-- <input type="text" name="customer_city" class="validate"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    Kota:
+                                    <div class="input-field col s12 ">
+                                    <select id="kota_asalnya" name="customer_kota_asal" required="" class="browser-default" placeholder="pilih kota">
+                                        <option value="" disabled >Pilih Provinsi dulu</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div> 
+                            <div class="row" >
+                                <div class="col s12">
+                                    Desa:
+                                    <div class="input-field col s12">
+                                        <input type="text" name="customer_desa" class="validate">
+                                    </div>
+                                </div>
+                            </div>  
                             <div class="row">
                                 <div class="col s12">
                                     Phone:

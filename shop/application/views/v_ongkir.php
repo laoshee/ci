@@ -37,9 +37,26 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4">Berat (Kg)</label>
                             <div class="col-sm-12">          
-                                <input type="text" class="form-control" id="berat" name="berat" placeholder="Max. 30 KG" required="">
+                                <input type="text" class="form-control" id="total" name="total" placeholder="Max. 30 KG" required="">
                             </div>
                         </div>
+
+                        <?php
+                            $i = 0;
+                            foreach ($cart_contents as $cart_items) {
+                                $i++;
+                                // print_r($cart_items);
+                        ?>
+
+                        <div class="form-group" hidden>
+                            <div class="col-sm-12">          
+                                <input type="text" id="berat<?=$i?>"  class="form-control ambil"  name="berat" value="<?php echo $cart_items['options']['p_weight']?>" onkeyup="getBerat()">
+                        		<!-- <input type="text" id="berat<?=$i?>" class="form-control ambil" name="qty" value="10" onkeyup="getItems()"> -->
+                            </div>
+                        </div>
+
+                        <?php } ?>
+
                         <div class="form-group">        
                             <div class="col-sm-offset-3 col-sm-8">
                                 <button type="submit" class="btn btn-success col-sm-8">Cek</button>
@@ -97,6 +114,50 @@
     </div>
 </div>
 <script type="text/javascript">
+	function getBerat(){
+        var items = new Array();
+        var itemCount = document.getElementsByClassName("ambil");
+        var total = 0;
+        //  var id= "";
+        for(var i = 0; i < itemCount.length; i++)
+            {
+                id = "berat"+(i+1);
+                total = total +  parseFloat(document.getElementById(id).value);
+            }
+            if (!isNaN(total)) {	
+                document.getElementById('total').value = total;
+                console.log( "s"+(document.getElementById(id).value),itemCount,$("#berat3").val());
+                return total;
+            }if (isNaN(total)) {
+                document.getElementById('total').value = "";
+                console.log(total);
+            }
+    }
+    getBerat();
+
+    function getTarif(){
+        var items = new Array();
+        var itemCount = document.getElementsByClassName("ambil");
+        var total = 0;
+        //  var id= "";
+        for(var i = 0; i < itemCount.length; i++)
+            {
+                id = "input_ongkir"+(i+1);
+                // ambil = total +  parseFloat(document.getElementById(id).value);
+                ambil = id;
+            }
+            if (!isNaN(ambil)) {	
+                document.getElementById('hasil_ongkir').value = ambil;
+                console.log( "s"+(document.getElementById(id).value),itemCount,$("#input_ongkir2").val());
+                return ambil;
+            }if (isNaN(ambil)) {
+                // document.getElementById('hasil_ongkir').value = "0";
+                console.log(ambil);
+            }
+    }
+    getTarif();
+</script>
+<script type="text/javascript">
     $(document).ready(function () {
         $('#kota_asal').select2({
             placeholder: '--Pilih kota/kabupaten asal--',
@@ -140,12 +201,40 @@
             });
         });
         
-        document.getElementById("tombol_ambilongkir");
-        addEventListener("click", tampilkan_nilai_form);
+        // document.getElementById("tombol_ambilongkir");
+        // addEventListener("click", tampilkan_nilai_form);
+
+
+
+
         function tampilkan_nilai_form(){
             var nilai_form = document.getElementById('input_ongkir').value;
-            document.getElementById("hasil_ongkir").value=nilai_form;
+            // var data = preg_replace("/[^0-9]/", "", $nilai_form); //untuk PHP
+            var data = nilai_form.replace(/[^0-9]/gi, ''); //untuk g adalah global
+            document.getElementById("hasil_ongkir").value=data;
         }
+
     });
-    
+
+        // // $('.ambilongkir').on('click', function (e) {
+        //     function ambilongkir(){
+        //     let $this = $(".tombol_ambilongkir"); 
+        //     let data = $this.attr("data-target");
+        //     // var data = $("#tombol_ambilongkir").children("td[data-target=cityPublisher]").attr("id");
+        //     // cegah redirect, soalnya itu element 'a', kalo ada href malah redirect lagi
+        //     // e.preventDefault();
+        //     console.log("cek");
+        //     // let $this = $(this);
+        //     // let $this = $("#ambilongkir").html();
+        //     // let id = $this.attr('data-id'); // pake ini coba, kali aja bisa
+        //     // var nilai_form = document.getElementById('input_ongkir').value;
+        //     // // var data = preg_replace("/[^0-9]/", "", $nilai_form); //untuk PHP
+        //     // var data = nilai_form.replace(/[^0-9]/gi, ''); //untuk g adalah global
+        //     // console.log(nilai_form);
+        //     // console.log(data);
+        //     console.log(data);
+        //     // console.log(e);
+        //     document.getElementById("hasil_ongkir").value=data;
+        // // });
+        // };
 </script>

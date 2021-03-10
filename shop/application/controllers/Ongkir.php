@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ongkir extends CI_Controller {
 
     public function index() {
+        $data['cart_contents'] = $this->cart->contents();
         $this->load->view('element/header_1');
-        $this->load->view('v_ongkir');
+        $this->load->view('v_ongkir',$data);
         // $this->load->view('element/footer');
     }
 
@@ -13,7 +14,7 @@ class Ongkir extends CI_Controller {
         $kota_asal = $_POST['kota_asal'];
         $kota_tujuan = $_POST['kota_tujuan'];
         $kurir = $_POST['kurir'];
-        $berat = $_POST['berat'] * 1000;
+        $berat = $_POST['total'] * 1000;
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -42,7 +43,7 @@ class Ongkir extends CI_Controller {
         $kotatujuan = $data['rajaongkir']['destination_details']['city_name'];
         $provinsitujuan = $data['rajaongkir']['destination_details']['province'];
         $berat = $data['rajaongkir']['query']['weight'] / 1000;
-
+        $itemCount = $data['rajaongkir']['results'];
         echo "
         <div class='card horizontal'>
                 <div class='card-stacked'>
@@ -55,28 +56,33 @@ class Ongkir extends CI_Controller {
                     echo '<table class="table table-striped table-bordered ">';
         echo '<thead>';
         echo '<tr>';
-        echo '<th>Nama Layanan</th>';
+        echo '<th>Nama Layanana</th>';
         echo '<th>Tarif</th>';
         echo '<th>ETD(Estimates Days)</th>';
         echo '<th>Pilih</th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
+
         foreach ($data['rajaongkir']['results'][0]['costs'] as $value) {
+            var_dump($value['service']);
             echo "<tr>";
             echo "<td>" . $value['service'] . "</td>";
             echo '';
             foreach ($value['cost'] as $tarif) {
+                print_r($value['cost']);
                 echo "<td align='right'>Rp " . number_format($tarif['value'], 2, ',', '.') . "</td>";
                 echo "<td>" . $tarif['etd'] . " Day</td>";
-                echo "<td>
+                for($i = 1; $i <= 3; $i++){
+                echo "    <td>
                 <form onsubmit='return false'>
-                    <input type='hidden' id='input_ongkir' value=".$tarif['value']."/>
-                <button id='tombol_ambilongkir' class='btn waves-effect waves-light red btn-small'>choise</button>
+                    <input type='submit' id='input_ongkir".$i."' data-target=".$tarif['value']." class='tombol_ambilongkir ambil'  value=".$tarif['value']." onclick='getTarif'>    
+                    <!--<input type='hidden' id='input_ongkir' class='ambil'  value=".$tarif['value']."/>-->
+                    <button id='' data-id=".$tarif['value']." class='btn waves-effect waves-light red btn-small'  onclick='ambilongkir()'>choise</button>
                 </form>
                 <!--<button type='submit' name='submit' class='btn waves-effect waves-light red btn-small'>
                  <button>Pilih Ongkir--></td>";
-            }
+            } }
             echo '';
             echo "";
             echo "</tr>";

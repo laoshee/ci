@@ -51,7 +51,8 @@ class Kota extends CI_Controller {
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
-                        "key:7b09222b91d225794bb6e835112d31f3"
+                        // "key:53341588ddd45a3a026d55d75738286b"
+                        "key: 7b09222b91d225794bb6e835112d31f3"
                     ),
                 ));
                 $response = curl_exec($curl);
@@ -76,7 +77,8 @@ class Kota extends CI_Controller {
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
-                        "key:7b09222b91d225794bb6e835112d31f3"
+                        // "key:53341588ddd45a3a026d55d75738286b"
+                        "key: 7b09222b91d225794bb6e835112d31f3"
                     ),
                 ));
                 $response = curl_exec($curl);
@@ -101,7 +103,6 @@ class Kota extends CI_Controller {
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
-                        // "key:53341588ddd45a3a026d55d75738286b"
                         "key:7b09222b91d225794bb6e835112d31f3"
                     ),
                 ));

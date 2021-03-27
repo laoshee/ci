@@ -63,11 +63,31 @@ class Customer extends CI_Controller {
 
         if ($this->form_validation->run() == true) {
             $result = $this->web_model->get_customer_info($data);
+
             if ($result) {
                 $this->session->set_userdata('customer_id', $result->customer_id);
                 $this->session->set_userdata('customer_name', $result->customer_name);
                 $this->session->set_userdata('customer_email', $result->customer_email);
-                redirect('customer/shipping');
+                $histori = array(
+                    'customer_id'       => $result->customer_id,
+                    'keterangan'        => 'login',
+                    'ip_address'        => $this->input->ip_address(),
+                    'os'                => $this->agent->platform(),
+                    'browser'           => $this->agent->browser(),
+                    'browser_version'   => $this->agent->version(),
+                    'tgl_input'         => (date("Y-m-d H:i:s")),
+                );
+
+                $saveData = $this->web_model->histori($histori);//{
+                if($saveData){
+                    redirect('customer/shipping');
+
+                }else{
+                    $this->session->set_flashdata('messagelogin', 'Customer Login Fail');
+                    redirect('user_form');
+                }
+                //}
+                
             } else {
                 $this->session->set_flashdata('messagelogin', 'Customer Login Fail');
                 redirect('user_form');
@@ -80,7 +100,7 @@ class Customer extends CI_Controller {
 
     public function customer_shipping()
     {
-        $master['title'] = 'SHOP BAYOE.ID';
+        $master['title'] = 'Bazar Mall';
         $master['content'] =  $this->load->view('web/pages/customer_shipping', NULL, true);
         $this->load->view('masterpage',$master); 
     }
@@ -129,41 +149,54 @@ class Customer extends CI_Controller {
         $this->form_validation->set_rules('berat_kg', 'Wrong Weight', 'trim|required');
         $this->form_validation->set_rules('ongkos', 'Wrong Weight', 'trim|required');
 
-        $data['customer_id']      = $this->input->post('customer_id');
-        $data['shipping_name']    = $this->input->post('shipping_name');
-        $data['shipping_kurir']   = $this->input->post('kurir');
-        $data['shipping_asal'] = $this->input->post('kota_asal');
-        $data['shipping_tujuan']    = $this->input->post('kota_tujuan');
-        $data['shipping_berat_kg'] = $this->input->post('berat_kg');
-        $data['shipping_ongkos'] = $this->input->post('ongkos');
+        $data['customer_id']            = $this->input->post('customer_id');
+        $data['shipping_name']          = $this->input->post('shipping_name');
+        $data['shipping_kurir']         = $this->input->post('kurir');
+        $data['shipping_idasal']        = $this->input->post('shipping_idasal');
+        $data['shipping_asal']          = $this->input->post('kota_asal');
+        $data['shipping_tujuan']        = $this->input->post('kota_tujuan');
+        $data['shipping_berat_kg']      = $this->input->post('berat_kg');
+        $data['shipping_ongkos']        = $this->input->post('ongkos');
+        $data['shipping_address']       = $this->input->post('shipping_alamat');
+        $data['shipping_provinsi']      = $this->input->post('shipping_provinsi');
+        $data['shipping_idprovinsi']    = $this->input->post('shipping_idprovinsi');
+        $data['shipping_idkota']        = $this->input->post('shipping_idkota');
+        $data['shipping_desa']          = $this->input->post('shipping_desa');
+        $data['shipping_phone']         = $this->input->post('shipping_phone');
+        $data['shipping_grandtotal']    = $this->input->post('grand_total');        
+        $data['tgl_input']              = (date("Y-m-d H:i:s"));
+
+        // shipping_nmkota
 
         if ($this->form_validation->run() === true) {
             $result = $this->web_model->save_shipping_address($data);
             $this->session->set_userdata('shipping_id', $result);
 
             $id_order = $this->web_model->buat_kodeorder();
-            $tgl = (date("Y-m-d H:i:s"));
-            // $payment_id           = $this->web_model->save_payment_info($data);
-            $odata['order_id']               = $id_order;
-            $odata['customer_id'] = $this->session->userdata('customer_id');
-            $odata['shipping_id'] = $this->session->userdata('shipping_id');
-            $tax                  = ($this->cart->total() * 15) / 100;
-            $totalall              = $this->input->post('ongkos');
-            $odata['order_total'] = $tax + $this->cart->total();
-            $odata['tgl_input']     = $tgl;
+            // $payment_id                  = $this->web_model->save_payment_info($data);
+            // $tax                         = ($this->cart->total() * 15) / 100;
+            // $odata['order_total']        = $tax + $this->cart->total();
+            $tgl                            = (date("Y-m-d H:i:s"));
+            $odata['order_id']              = $id_order;
+            $odata['customer_id']           = $this->session->userdata('customer_id');
+            $odata['shipping_id']           = $this->session->userdata('shipping_id');
+            $odata['order_barang']          = $this->input->post('shipping_totbarang');        
+            $odata['order_kurir']           = $this->input->post('ongkos');
+            $odata['order_grandtotal']      = $this->input->post('grand_total');
+            $odata['tgl_input']             = $tgl;
 
             $order_id = $this->web_model->save_order_info($odata);
 
             $oddata = array();
 
             $myoddata = $this->cart->contents();
-
             foreach ($myoddata as $oddatas) {
                 $oddata['order_id']               = $id_order;
                 $oddata['product_id']             = $oddatas['id'];
                 $oddata['product_name']           = $oddatas['name'];
                 $oddata['product_price']          = $oddatas['price'];
                 $oddata['product_sales_quantity'] = $oddatas['qty'];
+                $oddata['berat_satuan']           = $oddatas['options']['p_beratsatuan'];
                 $oddata['total_weight']           = $oddatas['options']['p_weight'];
                 $oddata['product_image']          = $oddatas['options']['product_image'];
                 $this->web_model->save_order_details_info($oddata);
@@ -178,12 +211,12 @@ class Customer extends CI_Controller {
 
     public function checkout()
     {
-        $master['title'] = 'SHOP BAYOE.ID';
+        $master['title'] = 'Bazar Mall';
         $master['content'] =  $this->load->view('web/pages/checkout', NULL, true);
         $this->load->view('masterpage',$master); 
     }
 
-    public function save_order()
+    public function save_order() //save order masuk di VIEW CHECKOUT
     {
         // $data['payment_type'] = $this->input->post('payment');
 
@@ -192,14 +225,14 @@ class Customer extends CI_Controller {
         if ($this->form_validation->run() == true) {
             $id_order = $this->web_model->buat_kodeorder();
             $tgl = (date("Y-m-d H:i:s"));
-            // $payment_id           = $this->web_model->save_payment_info($data);
-            $odata['order_id']               = $id_order;
-            $odata['customer_id'] = $this->session->userdata('customer_id');
-            $odata['shipping_id'] = $this->session->userdata('shipping_id');
-            $odata['payment']  = $this->input->post('payment');
-            $tax                  = ($this->cart->total() * 15) / 100;
-            $odata['order_total'] = $tax + $this->cart->total();
-            $odata['tgl_input']     = $tgl;
+            // $payment_id                      = $this->web_model->save_payment_info($data);
+            $odata['order_id']                  = $id_order;
+            $odata['customer_id']               = $this->session->userdata('customer_id');
+            $odata['shipping_id']               = $this->session->userdata('shipping_id');
+            $odata['payment']                   = $this->input->post('payment');
+            $tax                                = ($this->cart->total() * 15) / 100;
+            $odata['order_total']               = $tax + $this->cart->total();
+            $odata['tgl_input']                 = $tgl;
 
             $order_id = $this->web_model->save_order_info($odata);
 
@@ -208,7 +241,7 @@ class Customer extends CI_Controller {
             $myoddata = $this->cart->contents();
 
             foreach ($myoddata as $oddatas) {
-                // $oddata['order_id']               = $order_id;
+                // $oddata['order_id']            = $order_id;
                 $oddata['order_id']               = $id_order;
                 $oddata['product_id']             = $oddatas['id'];
                 $oddata['product_name']           = $oddatas['name'];
@@ -237,13 +270,13 @@ class Customer extends CI_Controller {
     public function payment($id_order)
     {
         // $id_order = 'OR-2102-0003';
-        $id['customer_id'] = $this->session->userdata('customer_id');
-        $get = $this->session->userdata('customer_id');
-        $data['bill'] = $this->web_model->customer_orderdetail($get,$id_order);
-        $data['customer'] = $this->web_model->get_onecustomer($id);
+        $id['customer_id']  = $this->session->userdata('customer_id');
+        $get                = $this->session->userdata('customer_id');
+        $data['bill']       = $this->web_model->customer_orderdetail($get,$id_order);
+        $data['customer']   = $this->web_model->get_onecustomer($id);
         if($id_order){
-        $master['title'] = 'SHOP BAYOE.ID';
-        $master['content'] =  $this->load->view('web/pages/payment', $data, true);
+        $master['title']    = 'Bazar Mall';
+        $master['content']  =  $this->load->view('web/pages/payment', $data, true);
         $this->load->view('masterpage',$master); 
         }else{
             redirect('404_override','refresh');
@@ -252,36 +285,36 @@ class Customer extends CI_Controller {
 
     public function customer_bill()
     {
-        $id['customer_id'] = $this->session->userdata('customer_id');
-        $get = $this->session->userdata('customer_id');
-        $data['bill'] = $this->web_model->customer_order($get);
-        $data['customer'] = $this->web_model->get_onecustomer($id);
+        $id['customer_id']  = $this->session->userdata('customer_id');
+        $get                = $this->session->userdata('customer_id');
+        $data['bill']       = $this->web_model->customer_order($get);
+        $data['customer']   = $this->web_model->get_onecustomer($id);
 
-        $master['title'] = 'SHOP BAYOE.ID';
-        $master['content'] =  $this->load->view('web/customer/bill', $data, true);
+        $master['title']    = 'Bazar Mall';
+        $master['content']  =  $this->load->view('web/customer/bill', $data, true);
         $this->load->view('masterpage',$master); 
     }
 
     public function detail_idcart()
     {
-        $get = $this->session->userdata('customer_id');
-        $id_order = $this->input->post('orderid');
-        $data = $this->web_model->customer_orderdetail_byone($get,$id_order);
+        $get                = $this->session->userdata('customer_id');
+        $id_order           = $this->input->post('orderid');
+        $data               = $this->web_model->customer_orderdetail_byone($get,$id_order);
         echo json_encode($data);
     }
 
     public function detail_idcarttotal()
     {
-        $get = $this->session->userdata('customer_id');
-        $id_order = $this->input->post('orderid');
-        $data = $this->web_model->customer_orderdetail_bysum($get,$id_order);
+        $get                = $this->session->userdata('customer_id');
+        $id_order           = $this->input->post('orderid');
+        $data               = $this->web_model->customer_orderdetail_bysum($get,$id_order);
         echo json_encode($data);
     }
 
     public function login()
     {
-        $master['title'] = 'SHOP BAYOE.ID';
-        $master['content'] =  $this->load->view('web/pages/customer_login', NULL, true);
+        $master['title']    = 'Bazar Mall';
+        $master['content']  =  $this->load->view('web/pages/customer_login', NULL, true);
         $this->load->view('masterpage',$master); 
     }
 

@@ -100,6 +100,11 @@ class Web_Model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function histori($data)
+    {
+        return $this->db->insert('histori', $data);
+    }
+
     public function get_customer_info($data)
     {
         $this->db->select('*');

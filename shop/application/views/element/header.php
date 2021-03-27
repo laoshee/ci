@@ -18,6 +18,9 @@
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/select2/select2.min.js"></script> 
     <!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/nav-hover.js"></script> -->
     <script src="<?php echo base_url() ?>assets/web/js/cdnjs/sweetalert2.all.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/web/js/jquery.maskMoney.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/web/js/jquery.maskMoney.min.js"></script>
+    <!-- <script src="<?php echo base_url() ?>assets/web/js/jquery.leanModal.min.js"></script> -->
     <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
 

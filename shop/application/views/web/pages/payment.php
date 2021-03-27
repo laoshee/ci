@@ -60,8 +60,8 @@
                                         <tr>
                                             <th>No. ID</th>
                                             <th>Kurir</th>
-                                            <th>Ongkir</th>
                                             <th>Total Order</th>
+                                            <th>Ongkir</th>
                                             <th>Total Bayar</th>
                                             <th>Status</th>
                                         </tr>
@@ -71,9 +71,10 @@
                                         <tr>
                                             <td><?php echo $b->order_id; ?></td>
                                             <td><?php echo $b->shipping_kurir; ?></td>
+                                            <td>Rp. <?php echo number_format($b->order_barang,2,',','.'); ?></td>
                                             <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->shipping_ongkos),2,',','.'); ?></td>
-                                            <td>Rp. <?php echo number_format($b->order_total,2,',','.'); ?></td>
-                                            <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->shipping_ongkos) + $b->order_total,2,',','.'); ?></td>
+                                            <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->order_grandtotal),2,',','.'); ?></td>
+                                            <!-- <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->shipping_ongkos) + $b->order_total,2,',','.'); ?></td> -->
                                             <td><?php echo $b->actions; ?></td>
                                         </tr>
                                         </tbody>

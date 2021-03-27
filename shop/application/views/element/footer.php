@@ -236,17 +236,61 @@
         })
 
 
-        document.getElementById("tombol_ambilongkir");
-        addEventListener("click", tampilkan_nilai_form);
-        function tampilkan_nilai_form(){
-            var nilai_form = document.getElementById('input_ongkir').value;
-            document.getElementById("hasil_ongkir").value=nilai_form;
-        }
+        // document.getElementById("tombol_ambilongkir");
+        // addEventListener("click", tampilkan_nilai_form);
+        // function tampilkan_nilai_form(){
+        //     var nilai_form = document.getElementById('input_ongkir').value;
+        //     document.getElementById("hasil_ongkir").value=nilai_form;
+        // } //disable karena ada di v_ongkir (tidak di pakai juga)
 
         $('select').formSelect();
         // $("select").material_select(); 
-
+        // $('.modal-trigger').leanModal();
+        $('.modal-trigger').modal({
+            dismissible: false,
+            opacity: 0.7
+        });
+        // $('.but').trigger('click');
+        // $( ".but" ).last().click(function() {
+        // $( ".modal-trigger" ).first().trigger( "click" );
+        // // update( $( "span" ).last() );
+        // });
         
+        $("#layanan_pengiriman").on("change", function(){
+        // $('#layanan_pengiriman').click(function(){
+            var menu = $(this).attr('id'); //jupuk ID ne tok. hasil layanan_pengiriman
+            var pilihan = document.getElementById("layanan_pengiriman").value;
+            var pindah_cod = "<?php echo site_url('Api/Shipping/cod'); ?>";
+            var pindah_kurir = "<?php echo site_url('Api/Shipping/kurir'); ?>";
+            // var total = document.getElementById('total').value;
+            var html = '';
+            console.log(pilihan);
+                if(pilihan === "COD"){
+                    $('#tampil_layanan_pengiriman').load(pindah_cod, function(){
+                        $("#layanan_pengiriman_hidden").hide();
+                        //alert("aawa");
+                        // $('.badan').load('tutorial.php');						
+                    });					
+                }else{
+                    $('#tampil_layanan_pengiriman').load(pindah_kurir, function(){
+                        $("#layanan_pengiriman_hidden").hide();
+                        // $("#tampil_total").val(total);
+                        // $("#kurir").val(pilihan);
+                        // $("#kurir option:selected").val() == pilihan;
+                        // document.getElementById("kurir").onclick = pilihan;//"You selected: "+document.getElementById("se").value;  
+                        // $("#kurir option:selected").val(pilihan);
+                        // if(pilihan === 'tiki'){
+                        //     html += "<option value='tiki' >TIKI</option> <option value='jne' selected>JNE</option>";
+                        //     $('#tampil_kurir').html(html);
+                        // }else{
+                        //     html += "<option value='pos'>POS</option>";
+                        //     $('#tampil_kurir').html(html);
+                        // }
+                        console.log(pilihan);
+
+                    });
+                }
+        });
 
     }); //PENUTUP DOCUMENT
 </script>
@@ -524,9 +568,6 @@
                     },
                     success: function(msg,value,e,xhr,responseText){
                         $("select#kota_asalnya").html(msg);
-                        console.log(msg);
-                        console.log(value);
-                        console.log(xhr,responseText);
                 }
                 })
             }
@@ -660,6 +701,247 @@
         // // })
         // }); //penutup
         // };
+        function refreshPage(){
+            window.location.reload();
+        } 
+</script>
+
+<script type="text/javascript">
+    function test(){
+        // $(".loading").show();
+        // $('#modal2').trigger('click');
+        console.log("cek");
+
+            var jne= $("#kurir").val(); 
+            var getcity= $("#kota_asalnya").val(); 
+            var berat= $("#tampil_total").val(); //bukan #total
+            var beratnya = berat*1000; //kudu dibagi sewu
+            var customer_name= $("#customer_ambilnama").val(); 
+            var customer_address= $("#customer_ambiladdress").val(); 
+            var ambilprovinsi= $("#id_ambilprovinsi").val(); 
+            var customer_provinsi= $("#id_provinsi").val(); 
+            var ambilkota= $("#id_ambilkota").val(); 
+            var kota_tujuan= $("#kota_asalnya").val(); 
+            var customer_desa= $("#customer_ambildesa").val(); 
+            var customer_phone= $("#customer_ambilphone").val(); 
+            $.ajax({
+                //url: 'cek_ongkir.php',
+                url: "<?php echo site_url('ongkir/cek_ongkir'); ?>",
+                type: 'post',
+                // data: $(this).serialize(),// ora isoh nganggo serialize API ne ra gelem moco, tapi datane liyo mlebu (19-03-2021)
+                data: { 
+                        ambilkotacity:getcity,
+                        kurir:jne,
+                        total:berat,
+                        customer_name:customer_name,
+                        customer_address:customer_address,
+                        ambilprovinsi:ambilprovinsi,
+                        customer_provinsi:customer_provinsi,
+                        ambilkota:ambilkota,
+                        kota_tujuan:kota_tujuan,
+                        customer_desa:customer_desa,
+                        customer_phone:customer_phone
+                        },
+                success: function (data) {
+                    // console.log(data);
+                    document.getElementById("response_ongkir").innerHTML = data;
+                }
+            });
+
+    }
+
+	function getBerat(){
+        var items = new Array();
+        var itemCount = document.getElementsByClassName("ambil");
+        var total = 0;
+        //  var id= "";
+        for(var i = 0; i < itemCount.length; i++)
+            {
+                id = "berat"+(i+1);
+                total = total +  parseFloat(document.getElementById(id).value);
+            }
+            if (!isNaN(total)) {	
+                document.getElementById('tampil_total').value = total;
+                // $("#totalx").val(total);
+                // console.log( "s"+(document.getElementById(id).value),itemCount,$("#berat2").val());
+                return total;
+            }if (isNaN(total)) {
+                document.getElementById('total').value = "";
+                console.log(total);
+            }
+    }
+    getBerat();
+
+    function reply_click(clicked_id){
+        // var nilai_form = document.getElementById('input_ongkir').value;
+        // var data = preg_replace("/[^0-9]/", "", $nilai_form); //untuk PHP
+        // var data = clicked_id.replace(/[^0-9]/gi, ''); //untuk g adalah global
+        document.getElementById("hasil_ongkir2").value=clicked_id;
+        // var format = number_format($clicked_id, 2, ',', '.');
+        // var format = $(clicked_id).maskMoney();
+        const numb = clicked_id;
+        const format = clicked_id.toString().split('').reverse().join('');
+        const convert = format.match(/\d{1,3}/g);
+        const rupiah = 'Rp. ' + convert.join(',').split('').reverse().join('') + '.00'
+
+        // console.log(rupiah)
+        document.getElementById("hasil_ongkirtext").innerHTML=rupiah;
+        // console.log(clicked_id);
+
+        function getTotalbiaya_plusongkir(){
+            var items = new Array();
+            var itemCount = document.getElementsByClassName("getambil_plusongkir");
+            var total = 0;
+            var id= "";
+            // var txtFirstNumberValue= $("#hasil_biayabarang").val(); 
+            // var txtSecondNumberValue= $("#hasil_ongkir").val(); 
+            var txtFirstNumberValue = document.getElementById('hasil_ongkir1').value;
+            var txtSecondNumberValue = document.getElementById('hasil_ongkir2').value;
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            const format = result.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = 'Rp. ' + convert.join(',').split('').reverse().join('') + '.00'
+            if (!isNaN(result)) {
+                document.getElementById('hasil_totalbiayatext').innerHTML = rupiah;
+                document.getElementById("grandtotal").value=result;
+            }
+        }
+        getTotalbiaya_plusongkir();
+    }
+
+    // function getTarif(){
+    //     // console.log("Cek1");
+    //     var items = new Array();
+    //     var itemCount = document.getElementsByClassName("ambil");
+    //     var total = 0;
+    //     //  var id= "";
+    //     for(var i = 0; i < itemCount.length; i++)
+    //         {
+    //             id = "input_ongkir"+(i+1);
+    //             // ambil = total +  parseFloat(document.getElementById(id).value);
+    //             ambil = id;
+    //         }
+    //         if (!isNaN(ambil)) {	
+    //             document.getElementById('hasil_ongkir').value = ambil;
+    //             console.log( "s"+(document.getElementById(id).value),itemCount,$("#input_ongkir2").val());
+    //             return ambil;
+    //         }if (isNaN(ambil)) {
+    //             // document.getElementById('hasil_ongkir').value = "0";
+    //             console.log(ambil);
+    //         }
+    // }
+    // getTarif();
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+//         $('#kota_asal').select2({
+//             placeholder: '--Pilih kota/kabupaten asal--',
+//             language: "id"
+//         });
+
+//         $('#kota_tujuan').select2({
+//             placeholder: '--Pilih kota/kabupaten tujuan--',
+//             language: "id"
+//         });
+
+//         $.ajax({
+//             type: "GET",
+//             dataType: "html",
+//             url: "<?php echo site_url('kota/get_kota/kotaasal'); ?>",
+//             success: function (msg) {
+//                 $("select#kota_asal").html(msg);
+//             }
+//         });    
+//    
+//         $.ajax({
+//             type: "GET",
+//             dataType: "html",
+//             url: "<?php echo site_url('kota/get_kota/kotatujuan'); ?>",
+//             success: function (msg) {
+//                 $("select#kota_tujuan").html(msg);
+//             }
+//         });
+
+        $("#ongkir").submit(function (e) {
+            e.preventDefault();
+            var jne= $("#kurir").val(); 
+            var getcity= $("#kota_asalnya").val(); 
+            var berat= $("#tampil_total").val(); //bukan #total
+            var beratnya = berat*1000; //kudu dibagi sewu
+            var customer_name= $("#customer_ambilnama").val(); 
+            var customer_address= $("#customer_ambiladdress").val(); 
+            var ambilprovinsi= $("#id_ambilprovinsi").val(); 
+            var customer_provinsi= $("#id_provinsi").val(); 
+            var ambilkota= $("#id_ambilkota").val(); 
+            var kota_tujuan= $("#kota_asalnya").val(); 
+            var customer_desa= $("#customer_ambildesa").val(); 
+            var customer_phone= $("#customer_ambilphone").val(); 
+            $.ajax({
+                //url: 'cek_ongkir.php',
+                url: "<?php echo site_url('ongkir/cek_ongkir'); ?>",
+                type: 'post',
+                // data: $(this).serialize(),// ora isoh nganggo serialize API ne ra gelem moco, tapi datane liyo mlebu (19-03-2021)
+                data: { 
+                        ambilkotacity:getcity,
+                        kurir:jne,
+                        total:berat,
+                        customer_name:customer_name,
+                        customer_address:customer_address,
+                        ambilprovinsi:ambilprovinsi,
+                        customer_provinsi:customer_provinsi,
+                        ambilkota:ambilkota,
+                        kota_tujuan:kota_tujuan,
+                        customer_desa:customer_desa,
+                        customer_phone:customer_phone
+                        },
+                success: function (data) {
+                    // console.log(data);
+                    document.getElementById("response_ongkir").innerHTML = data;
+                }
+            });
+        });
+        
+        // document.getElementById("tombol_ambilongkir");
+        // addEventListener("click", tampilkan_nilai_form);
+
+
+
+
+        // function tampilkan_nilai_form(){
+        //     var nilai_form = document.getElementById('input_ongkir').value;
+        //     // var data = preg_replace("/[^0-9]/", "", $nilai_form); //untuk PHP
+        //     var data = nilai_form.replace(/[^0-9]/gi, ''); //untuk g adalah global
+        //     document.getElementById("hasil_ongkir").value=data;
+        // }
+
+        // function tampilkan_nilai_form(){
+        //     var itemCount = document.getElementsByClassName("ambilongkir");
+        //     var total = 0;
+        //     //  var id= "";
+        //     for(var i = 0; i < itemCount.length; i++)
+        //         {
+        //             id = "input_ongkir"+(i+1);
+        //             nilai_form = parseInt(document.getElementById(id).value);
+        //             // var data = nilai_form.replace(/[^0-9]/gi, ''); //untuk g adalah global
+        //             // hasil = total +  data;
+        //             // nilai_form = id;
+        //         }
+
+        //     // var nilai_form = document.getElementById('input_ongkir').value;
+        //     // var data = preg_replace("/[^0-9]/", "", $nilai_form); //untuk PHP
+        //     // var data = nilai_form.replace(/[^0-9]/gi, ''); //untuk g adalah global
+        //     document.getElementById("hasil_ongkir").value=nilai_form;
+        //     console.log(nilai_form);
+        //     console.log(itemCount);
+        //     console.log(id);
+        //     console.log(parseInt(document.getElementById("input_ongkir1").value));
+        //     console.log(parseInt(document.getElementById("tombol_ambilongkir")));
+        // }
+
+
+    });
 </script>
 </body>
 </html>

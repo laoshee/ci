@@ -1,0 +1,446 @@
+/* ----------- Galaxy S3 ----------- */
+
+/* Portrait and Landscape */
+/* @media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 2) {
+    .slide-laptop{
+        display:none;
+    }
+
+    .slide-mobile{
+        display:none;
+    }
+
+} */
+
+/*
+////////////////////////////////////////////////////////
+/////////////////      Wearables      //////////////////
+//////////////////////////////////////////////////////// 
+*/
+
+/* ----------- Moto 360 Watch ----------- */
+/* @media 
+  (max-device-width: 218px)
+  and (max-device-height: 281px) { 
+    .slick-konten-mobile{
+        display:none;
+    }
+    .slick-konten{
+        display:none;
+    }
+} */
+
+/*
+////////////////////////////////////////////////////////
+///////////////////      LAPTOP      ///////////////////
+//////////////////////////////////////////////////////// 
+*/
+
+/* ----------- Non-Retina Screens ----------- */
+/* @media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .slide-laptop{ */
+        /* display:none; */
+    /* }
+
+    .slide-mobile{
+        display:none;
+    }
+
+} */
+
+/* ----------- Retina Screens ----------- */
+/* @media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .slide-laptop{ */
+        /* display:none; */
+    /* }
+
+    .slide-mobile{
+        display:none;
+    }
+    
+} */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    .slide-laptop{
+        display:none;
+    }
+
+    /* .slide-mobile{
+        display:none;
+    } */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+    /* .slide-laptop{
+        display:none;
+    } */
+
+    .slide-mobile{
+        display:block;
+    }
+
+    .prev {
+        background: url(../prev.png) no-repeat;
+        /* left: 0; */
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: -5%;
+        width: 21px;
+        height: 40px;
+    }
+
+    .next {
+        background: url(../next.png) no-repeat;
+        right: 0;
+        display: block;
+        position: absolute;
+        top: 40%;
+        right:-5%;
+        width: 21px;
+        height: 40px;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+    .slide-laptop{
+        display:none;
+    }
+
+    /* .slide-mobile{
+        display:none;
+    } */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+    .slide-laptop{
+        display:block !important;
+    }
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+    /* .slide-laptop{
+        display:none;
+    } */
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+    /* .slide-laptop{
+        display:none;
+    } */
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+    /* .slide-laptop{
+        display:none;
+    } */
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+    /* .slide-laptop{
+        display:none;
+    } */
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* iPhone 4 - 5s ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+    .slide-laptop{
+        display:none;
+    }
+
+    /* .slide-mobile{
+        display:block;
+    } */
+
+    
+
+    .prev {
+        background: url(../prev.png) no-repeat;
+        /* left: 0; */
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: -10%;
+        width: 21px;
+        height: 40px;
+    }
+
+    .next {
+        background: url(../next.png) no-repeat;
+        right: 0;
+        display: block;
+        position: absolute;
+        top: 40%;
+        right:-10%;
+        width: 21px;
+        height: 40px;
+    }
+}
+
+/* iPhone 6 ----------- */
+@media
+ only screen and (max-device-width: 667px) /* only screen  */
+and (-webkit-device-pixel-ratio: 2) {
+  /* Styles */
+    .slide-laptop{
+        display:none;
+    }
+
+    /* .slide-mobile{
+        display:none;
+    } */
+    .prev {
+        background: url(../prev.png) no-repeat;
+        /* left: 0; */
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: -10%;
+        width: 21px;
+        height: 40px;
+    }
+
+    .next {
+        background: url(../next.png) no-repeat;
+        right: 0;
+        display: block;
+        position: absolute;
+        top: 40%;
+        right:-10%;
+        width: 21px;
+        height: 40px;
+    }
+}
+
+/* iPhone 6+ ----------- */
+@media
+only screen and (min-device-width : 414px) /*only screen*/
+ and (-webkit-device-pixel-ratio: 3) {
+  /*** You've spent way too much on a phone ***/
+    .slide-laptop{
+        display:none;
+    }
+
+    .slide-mobile{
+        display:none;
+    }
+}
+
+/* Samsung Galaxy S7 Edge ----------- */
+@media only screen
+and (-webkit-min-device-pixel-ratio: 3) /*,*/
+and (min-resolution: 192dpi) and (max-width:640px) {
+ /* Styles */
+    .slide-laptop{
+        display:none;
+    }
+
+    .slide-mobile{
+        display:block;
+    }
+
+    .prev {
+        background: url(../prev.png) no-repeat;
+        /* left: 0; */
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: -10%;
+        width: 21px;
+        height: 40px;
+    }
+
+    .next {
+        background: url(../next.png) no-repeat;
+        right: 0;
+        display: block;
+        position: absolute;
+        top: 40%;
+        right:-10%;
+        width: 21px;
+        height: 40px;
+    }
+}
+
+
+    .slick-konten{
+        display:block;
+        background: #fff;
+        color: #3498db;
+        font-size: 36px;
+        line-height: 100px;
+        margin: 10px;
+        /* padding: 2%; */
+        position: relative;
+        text-align: center;
+    }
+
+
+
+    .slick-konten .img {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        border-radius: 50%;
+    }
+
+    .slick-konten  .img img {
+        width: 100%;
+    }
+/* } */
+
+
+/* .slick_main {
+    font-family:Arial;
+    width:500px;
+    display:block;
+    margin:0 auto;
+} */
+
+
+/* Arrows */
+.slick-prev,
+.slick-next
+{
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+    color: transparent;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+
+    opacity: .75;
+    color: #ee6e73;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* .slick-prev
+{
+    left: -25px;
+}
+[dir='rtl'] .slick-prev
+{
+    right: -25px;
+    left: auto;
+}
+.slick-prev:before
+{
+    content: '←';
+}
+[dir='rtl'] .slick-prev:before
+{
+    content: '→';
+}
+
+.slick-next
+{
+    right: -25px;
+}
+[dir='rtl'] .slick-next
+{
+    right: auto;
+    left: -25px;
+}
+.slick-next:before
+{
+    content: '→';
+}
+[dir='rtl'] .slick-next:before
+{
+    content: '←';
+} */

@@ -3,13 +3,27 @@
 class Web_Model extends CI_Model
 {
 
-    public function get_all_featured_product()
+    public function get_product()
     {
         $this->db->select('*,product.publication_status as pstatus');
         $this->db->from('product');
         $this->db->join('category', 'category.id=product.product_category');
         $this->db->join('brand', 'brand.brand_id=product.product_brand');
-        $this->db->order_by('product.product_id', 'DESC');
+        $this->db->order_by('product.product_id', 'ASC');
+        $this->db->where('product.publication_status', 1);
+        $this->db->where('product_feature', 1);
+        $this->db->limit(10);
+        $info = $this->db->get();
+        return $info->result();
+    }
+
+    public function get_old_product()
+    {
+        $this->db->select('*,product.publication_status as pstatus');
+        $this->db->from('product');
+        $this->db->join('category', 'category.id=product.product_category');
+        $this->db->join('brand', 'brand.brand_id=product.product_brand');
+        $this->db->order_by('product.product_id', 'ASC');
         $this->db->where('product.publication_status', 1);
         $this->db->where('product_feature', 1);
         $this->db->limit(4);
@@ -25,7 +39,7 @@ class Web_Model extends CI_Model
         $this->db->join('brand', 'brand.brand_id=product.product_brand'); //BRAND 
         $this->db->order_by('product.product_id', 'DESC');
         $this->db->where('product.publication_status', 1);
-        $this->db->limit(4);
+        $this->db->limit(8);
         $info = $this->db->get();
         return $info->result();
     }
@@ -178,6 +192,7 @@ class Web_Model extends CI_Model
     }
 
     public function customer_orderdetail($id_customer,$id_order){
+        $this->db->select('o.customer_id,o.order_barang, o.actions,s.shipping_address as alamat, s.shipping_ongkos, o.order_id as id, s.shipping_kurir as kurir,s.shipping_grandtotal as total, s.shipping_provinsi as provinsi, s.shipping_tujuan as tujuan, s.shipping_desa as desa');
         $this->db->from('t_order o');
         $this->db->join('t_order_details od', 'o.order_id = od.order_id');
         $this->db->join('shipping s', 'o.shipping_id = s.shipping_id');

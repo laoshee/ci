@@ -1,3 +1,32 @@
+<footer class="page-footer">
+<div class="footer-copyright">
+    <div class="container">
+    © 
+    <?php $tgl=date('Y');
+        echo $tgl;
+    ?>
+    <a href="#" class=" white-text"> BAZAR MALL </a>.
+    All rights reserved | Developed by <a href="http://bayoe.id" 
+    title="Jasa Pembuatan Web, Profesional, Toko Online, Terbaik, Company Profile" class=" white-text">
+    Bayoe.id Website</a>
+
+    <!-- <div > -->
+        <!-- <h4>Follow Us</h4> -->
+        <span class="grey-text text-lighten-4 right social-icons">
+            <li class="facebook"><a href="<?php echo get_option('site_facebook_link');?>" target="_blank"> </a></li>
+            <li class="twitter"><a href="<?php echo get_option('site_twitter_link');?>" target="_blank"> </a></li>
+            <!-- <li class="googleplus"><a href="<?php echo get_option('site_google_plus_link');?>" target="_blank"> </a></li> -->
+            <!-- <li class="contact"><a href="<?php echo get_option('site_email_link');?>" target="_blank"> </a></li> -->
+            <div class="clear"></div>
+        </span>
+    <!-- </div> -->
+    <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+    <!-- <a class="grey-text text-lighten-4 right" href="https://www.facebook.com/bayoe37">
+        <img src="https://bayoe.id/ci/nta/assets/image/icon sosmed/facebook.png" class="responsive-img" style="width:62px">
+    </a> -->
+    </div>
+    </div>
+</footer>
 <script type="text/javascript">
 // $('.amount').change(function() {
 //     $('#total').attr('value', function() {
@@ -125,7 +154,6 @@
 
 
     $(document).ready(function () {
-
         /*
          var defaults = {
          containerID: 'toTop', // fading element id
@@ -250,6 +278,33 @@
             dismissible: false,
             opacity: 0.7
         });
+        $('.sidenav').sidenav();
+        $('.slider').slider();
+
+        $('.slider_slick').slick({
+            dots: false,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            focusOnSelect: false,
+            arrows: true,
+            nextArrow: '<span class="next"> &nbsp;&nbsp;&nbsp;</span>',
+            prevArrow: '<a href="#n" class="prev">&nbsp;&nbsp;&nbsp;<!--<i class="large material-icons" >keyboard_arrow_left</i>--></a>'
+        });
+
+        $('.slider_slick_mobile').slick({
+            dots: false,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            focusOnSelect: false,
+            arrows: true,
+            nextArrow: '<span class="next"> &nbsp;&nbsp;&nbsp;</span>',
+            prevArrow: '<a href="#n" class="prev">&nbsp;&nbsp;&nbsp;<!--<i class="large material-icons" >keyboard_arrow_left</i>--></a>'
+        });
+        
         // $('.but').trigger('click');
         // $( ".but" ).last().click(function() {
         // $( ".modal-trigger" ).first().trigger( "click" );
@@ -260,12 +315,12 @@
         // $('#layanan_pengiriman').click(function(){
             var menu = $(this).attr('id'); //jupuk ID ne tok. hasil layanan_pengiriman
             var pilihan = document.getElementById("layanan_pengiriman").value;
-            var pindah_cod = "<?php echo site_url('Api/Shipping/cod'); ?>";
+            var pindah_cod = "<?php echo site_url('Api/Shipping/gratis_ongkir'); ?>";
             var pindah_kurir = "<?php echo site_url('Api/Shipping/kurir'); ?>";
             // var total = document.getElementById('total').value;
             var html = '';
             console.log(pilihan);
-                if(pilihan === "COD"){
+                if(pilihan === "GO"){
                     $('#tampil_layanan_pengiriman').load(pindah_cod, function(){
                         $("#layanan_pengiriman_hidden").hide();
                         //alert("aawa");
@@ -296,19 +351,19 @@
 </script>
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"><i class="tiny material-icons" style="display:contents">keyboard_capslock</i></a></span>
 <!--  -->
-<link href="<?php echo base_url()?>assets/web/css/flexslider.css" rel='stylesheet' type='text/css' />
+<!-- <link href="<?php echo base_url()?>assets/web/css/flexslider.css" rel='stylesheet' type='text/css' /> -->
 
 <script type="text/javascript" src="<?php echo base_url()?>assets/materialize/js/materialize.min.js"></script>
 
-<script defer src="<?php echo base_url()?>assets/web/js/jquery.flexslider.js"></script>
+<!-- <script defer src="<?php echo base_url()?>assets/web/js/jquery.flexslider.js"></script> -->
 <script type="text/javascript">
     $(window).load(function () {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            start: function (slider) {
-                $('body').removeClass('loading');
-            }
-        });
+        // $('.flexslider').flexslider({
+        //     animation: "slide",
+        //     start: function (slider) {
+        //         $('body').removeClass('loading');
+        //     }
+        // });
     });
 
     // $(document).ready(function () {
@@ -617,6 +672,58 @@
             }
         });
 
+        $("#provinsi_go").change(function(){
+            var id=$(this).val();
+            var tes = document.getElementById('provinsi_go').value;
+            
+            if(id === '5'){
+                document.getElementById("id_go_ambilprovinsi").value='DI Yogyakarta';
+                document.getElementById("kota_go").innerHTML=
+                    "<option value=''>--Pilih Kota--</option>"+
+                    "<option value='39'>Bantul</option>"+
+                    "<option value='135'>Gunung Kidul</option>"+
+                    "<option value='210'>Kulon Progo</option>"+
+                    "<option value='419'>Sleman</option>"+
+                    "<option value='501'>Yogyakarta</option>";
+            }else if(id === '10'){
+                document.getElementById("id_go_ambilprovinsi").value='Jawa Tengah';
+                document.getElementById("kota_go").innerHTML=
+                    "<option value=''>--Pilih Kota--</option>"+
+                    "<option value='91' >Boyolali</option>"+
+                    "<option value='196'>Klaten</option>"+
+                    "<option value='250'>Magelang</option>"+
+                    "<option value='445'>Surakarta (Solo)</option>";
+            }else{
+            document.getElementById("id_go_ambilprovinsi").value=tes;
+            }
+        });
+
+        $("#kota_go").change(function(){
+            var id=$(this).val();
+            var tes = document.getElementById('kota_go').value;
+            if(id === '91'){
+                document.getElementById("id_go_ambilkota").value='Boyolali';
+            }else if(id === '196'){
+                document.getElementById("id_go_ambilkota").value='Klaten';
+            }else if(id === '250'){
+                document.getElementById("id_go_ambilkota").value='Magelang';
+            }else if(id === '445'){
+                document.getElementById("id_go_ambilkota").value='Surakarta (Solo)';
+            }else if(id === '39'){
+                document.getElementById("id_go_ambilkota").value='Bantul';
+            }else if(id === '135'){
+                document.getElementById("id_go_ambilkota").value='Gunung Kidul';
+            }else if(id === '210'){
+                document.getElementById("id_go_ambilkota").value='Kulon Progo';
+            }else if(id === '419'){
+                document.getElementById("id_go_ambilkota").value='Sleman';
+            }else if(id === '501'){
+                document.getElementById("id_go_ambilkota").value='Yogyakarta';
+            }else{
+            document.getElementById("id_go_ambilkota").value=tes;
+            }
+        });
+
         // $.ajax({
         //     type: "GET",
         //     dataType: "html",
@@ -712,7 +819,9 @@
         // $('#modal2').trigger('click');
         console.log("cek");
 
-            var jne= $("#kurir").val(); 
+        var jne= $("#kurir").val(); 
+
+        if(jne != 'GO'){
             var getcity= $("#kota_asalnya").val(); 
             var berat= $("#tampil_total").val(); //bukan #total
             var beratnya = berat*1000; //kudu dibagi sewu
@@ -747,6 +856,43 @@
                     document.getElementById("response_ongkir").innerHTML = data;
                 }
             });
+        
+        }else{
+            var getcity= $("#kota_asalnya").val(); 
+            var berat= $("#tampil_total").val(); //bukan #total
+            // var beratnya = berat*1000; //kudu dibagi sewu
+            var customer_name= $("#customer_ambilnama").val(); 
+            var customer_address= $("#customer_ambiladdress").val(); 
+            var ambilprovinsi= $("#id_go_ambilprovinsi").val(); 
+            var customer_provinsi= $("#provinsi_go").val(); 
+            var ambilkota= $("#id_go_ambilkota").val(); 
+            var kota_tujuan= $("#kota_go").val(); 
+            var customer_desa= $("#customer_ambildesa").val(); 
+            var customer_phone= $("#customer_ambilphone").val(); 
+                $.ajax({
+                    //url: 'cek_ongkir.php',
+                    url: "<?php echo site_url('ongkir/cek_ongkir'); ?>",
+                    type: 'post',
+                    // data: $(this).serialize(),// ora isoh nganggo serialize API ne ra gelem moco, tapi datane liyo mlebu (19-03-2021)
+                    data: { 
+                            ambilkotacity:getcity,
+                            kurir:jne,
+                            total:berat,
+                            customer_name:customer_name,
+                            customer_address:customer_address,
+                            ambilprovinsi:ambilprovinsi,
+                            customer_provinsi:customer_provinsi,
+                            ambilkota:ambilkota,
+                            kota_tujuan:kota_tujuan,
+                            customer_desa:customer_desa,
+                            customer_phone:customer_phone
+                            },
+                    success: function (data) {
+                        // console.log(data);
+                        document.getElementById("response_ongkir").innerHTML = data;
+                    }
+                });
+        }
 
     }
 

@@ -5,11 +5,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?php echo base_url() ?>assets/materialize/css/materialize.min.css"  media="screen,projection"/>
     <link href="<?php echo base_url() ?>assets/web/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="<?php echo base_url() ?>assets/web/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="<?php echo base_url() ?>assets/web/css/style_slider.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="<?php echo base_url() ?>assets/web/css/cdnjs/sweetalert.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="<?php echo base_url() ?>assets/web/css/select2/select2.min.css" rel="stylesheet" type="text/css"/>
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/animsition/css/main.css')?>"> -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/animsition/css/animsition.min.css')?>">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
+    <title><?= $title?></title>
 
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/jquery-1.7.2.min.js"></script> 
     <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/nav.js"></script>
@@ -19,14 +23,18 @@
     <!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/web/js/nav-hover.js"></script> -->
     <script src="<?php echo base_url() ?>assets/web/js/cdnjs/sweetalert2.all.min.js"></script>
     <script src="<?php echo base_url() ?>assets/web/js/jquery.maskMoney.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/web/js/jquery.maskMoney.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/animsition/js/animsition.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- <script src="<?php echo base_url() ?>assets/animsition/js/main.min.js"></script> -->
     <!-- <script src="<?php echo base_url() ?>assets/web/js/jquery.leanModal.min.js"></script> -->
     <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Doppio+One' rel='stylesheet' type='text/css'>
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('/assets/uploads/'); ?><?php echo get_option('site_favicon'); ?>" />
+
 </head>
-<body >
+<body class="animsition fade-in" style="animation-duration: 1500ms;">
 
   <nav class="nav-extended">
       <div class="nav-wrapper">
@@ -101,4 +109,36 @@
         </ul>
       </div>
     </nav>
+
+<ul class="sidenav" id="mobile-demo" style="background-color:#ee6e73">
+    <li class=""> </li>
+    <li class="tab card">
+        <a href="<?php echo base_url('cart');?>" >
+        <i class="material-icons" style="display:contents">shopping_cart</i>
+        Cart(<?php echo $this->cart->total_items();?> Items)</a> 
+    </li>
+
+        <?php
+        $customer_id = $this->session->userdata('customer_id');
+            if ($customer_id) {
+        ?>
+
+    <li class="tab"> &nbsp;Welcome, <?= $this->session->userdata('customer_name'); ?>&nbsp;</a></li>
+    <li class="tab card"> <a href="<?php echo base_url('/customer/logout'); ?>">Logout&nbsp;</a></div></li>
+        
+        <?php } else {
+        ?>
     
+    <li class="tab card"><a href="<?php echo base_url('/customer/login'); ?>">Login&nbsp;</a></div></li>
+    
+    <li class="tab 
+        <?php
+            if ($this->uri->uri_string() == 'customer/register') {
+                echo "active";
+        }?>">
+    <!-- <div class="col s12 m2"><a href="<?php echo base_url('/customer/register'); ?>" class="z-depth-3">Register</a> </div> </li> -->                
+        <?php }?>
+</ul>
+
+
+

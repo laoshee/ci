@@ -15,7 +15,7 @@
                         <div class=" card horizontal">
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <?php foreach ($customer as $c) { ?>                
+                                    <?php foreach ($bill as $c) { ?>                
                                     <table class="col s12 m5 l5">
                                         <thead>
                                         <!-- <tr>
@@ -25,17 +25,27 @@
 
                                         <tbody>
                                         <tr>
-                                            <th colspan='3' class="center-align flow-text red-text">Customer Data</th>
+                                            <th colspan='3' class="center-align flow-text red-text">Pengiriman</th>
                                         </tr>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Alamat</th>
                                             <td>:</td>
-                                            <td><?= $c->customer_name; ?> <br></td>
+                                            <td><?= $c->alamat; ?> </td>
                                         </tr>
                                         <tr>
-                                            <th>Address</th>
+                                            <th>Provinsi</th>
                                             <td>:</td>
-                                            <td><?= $c->customer_address; ?> </td>
+                                            <td><?= $c->provinsi; ?> <br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kota</th>
+                                            <td>:</td>
+                                            <td><?= $c->tujuan; ?> </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Desa</th>
+                                            <td>:</td>
+                                            <td><?= $c->desa; ?> </td>
                                         </tr>
                                         </tbody>
                                     </table>                  
@@ -46,14 +56,28 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th colspan='1' class="center-align flow-text red-text">How To Purchasing</th>
+                                                <th colspan='1' class="center-align flow-text red-text">Cara Pembayaran</th>
                                             </tr>
                                             <tr>
-                                                <td>tagihan dapat segera di lunasi melalui nomor rekening: 123xx123xx</td>
+                                                <td>tagihan dapat segera di lunasi melalui: <br>
+                                                <table style='float:right;text-align:left;' width='40%'>
+                                                    <tr>
+                                                        <th>Nama:</th>
+                                                        <td><span>Bayu Sutrisno</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Bank: </th>
+                                                        <td>Mandiri</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>No.Rekening: </th>
+                                                        <td>900 0029 7922 08</td>
+                                                    </tr>
+                                                </table></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <b><span class="col s12 m12 l12 center-align flow-text red-text">Information Bill</span></b>
+                                    <b><span class="col s12 m12 l12 center-align flow-text red-text">Informasi Tagihan</span></b>
                                     <table class="col s12 m7 l12 bordered striped centered highlight responsive-table">
                                     <?php foreach ($bill as $b) { ?>                
                                         <thead>
@@ -69,11 +93,11 @@
 
                                         <tbody>
                                         <tr>
-                                            <td><?php echo $b->order_id; ?></td>
-                                            <td><?php echo $b->shipping_kurir; ?></td>
+                                            <td><?php echo $b->id; ?></td>
+                                            <td><?php echo $b->kurir; ?></td>
                                             <td>Rp. <?php echo number_format($b->order_barang,2,',','.'); ?></td>
                                             <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->shipping_ongkos),2,',','.'); ?></td>
-                                            <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->order_grandtotal),2,',','.'); ?></td>
+                                            <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->total),2,',','.'); ?></td>
                                             <!-- <td>Rp. <?php echo number_format(preg_replace("/[^0-9]/", "", $b->shipping_ongkos) + $b->order_total,2,',','.'); ?></td> -->
                                             <td><?php echo $b->actions; ?></td>
                                         </tr>

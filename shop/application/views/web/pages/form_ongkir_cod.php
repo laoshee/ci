@@ -22,16 +22,16 @@
                         </div>
                     </div>   
                     <div class="row" hidden>
-                        <div class="col s12">
+                        <div class="col s12" >
                             <div class="input-field col s12">
-                                <input type="text" id="id_ambilprovinsi" name="ambilprovinsi">
+                                <input type="text" id="id_go_ambilprovinsi" name="ambilprovinsi">
                             </div>
                         </div>
                     </div>    
                     <div class="row" hidden>
-                        <div class="col s12">
+                        <div class="col s12" >
                             <div class="input-field col s12">
-                                <input type="text" id="id_ambilkota" name="ambilkota">
+                                <input type="text" id="id_go_ambilkota" name="ambilkota">
                             </div>
                         </div>
                     </div>    
@@ -39,8 +39,10 @@
                         <div class="col s12">
                             Provinsi:
                             <div class="input-field col s12">
-                            <select id="id_provinsi" name="customer_provinsi" class="browser-default" placeholder="pilih provinsi">
-                                <option value="" disabled selected>Pilih Provinsi</option>
+                            <select name="customer_provinsi" class="browser-default" id="provinsi_go" >
+                                <option value=""  >--Pilih Provinsi--</option>
+                                <option value="5">DI Yogyakarta</option>
+                                <option value="10">Jawa Tengah</option>
                             </select>
                             </div>
                         </div>
@@ -49,8 +51,8 @@
                         <div class="col s12">
                             Kota:
                             <div class="input-field col s12 ">
-                            <select id="kota_asalnya" name="kota_tujuan" class="browser-default" placeholder="pilih kota">
-                                <option value="" >Pilih Provinsi dulu</option>
+                            <select name="kota_tujuan" class="browser-default" placeholder="pilih kota" id="kota_go" required>
+                            <option value=""  >--Pilih Provinsi dulu--</option>
                             </select>
                             </div>
                         </div>
@@ -87,7 +89,7 @@
                             Kurir:
                             <div class="input-field col s12 ">
                             <select id="kurir" name="kurir" required="" placeholder="pilih kurir">
-                                <option value="COD" selected>COD (gratis)</option>
+                                <option value="GO" selected>Gratis Ongkir</option>
                             </select>
                             </div>
                         </div>

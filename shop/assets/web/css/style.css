@@ -99,3 +99,40 @@ text-align: center;
     max-width:100%;
 }
 
+/*** Social Icons ***/
+/* .social-icons{
+    padding-top:8%;
+} */
+.social-icons li {
+    width:30px;
+    height:30px;
+    padding: 0px 0 0 5px;
+    margin: 0;
+    display:inline-block;
+    cursor:pointer;
+    /* display:contents; */
+}
+.social-icons li.facebook {
+    background:url(../icon-2.png) no-repeat 0px  -29px;
+}
+.social-icons li.facebook:hover {
+    background:url(../icon-2.png) no-repeat 0px  0px;
+}
+.social-icons li.twitter {
+    background:url(../icon-3.png) no-repeat 0px  -29px;
+}
+.social-icons li.twitter:hover {
+    background:url(../icon-3.png) no-repeat 0px  0px;
+}
+.social-icons li.googleplus {
+    background:url(../icon-4.png) no-repeat 0px  -29px;
+}
+.social-icons li.googleplus:hover {
+    background:url(../icon-4.png) no-repeat 0px  0px;
+}
+.social-icons li.contact {
+    background:url(../icon-1.png) no-repeat 0px  -29px;
+}
+.social-icons li.contact:hover {
+    background:url(../icon-1.png) no-repeat 0px  0px;
+}

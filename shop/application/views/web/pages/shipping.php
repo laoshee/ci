@@ -14,7 +14,7 @@
                         <div class="input-field col s12 ">
                         <select id="layanan_pengiriman" name="layanan_pengiriman" required="" placeholder="pilih kurir">
                             <option value="">--Pilih Jenis Layanan Pengiriman--</option>
-                            <option value="COD">COD (gratis)</option>
+                            <option value="GO">Gratis Ongkir</option>
                             <option value="jne">JNE</option>
                             <option value="tiki">TIKI</option>
                             <option value="pos">POS INDONESIA</option>

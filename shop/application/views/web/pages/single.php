@@ -18,7 +18,7 @@
             <div class="card red accent-1">
                 <div class="card horizontal">
                     <div class="card-image">
-                        <img class="responsive-img" src="<?php echo base_url('assets/uploads/'.$get_single_product->product_image)?>" alt="" />
+                        <img class="responsive-img" src="<?php echo base_url('assets/uploads/' . $get_single_product->product_folder.'/' .$get_single_product->product_image)?>" alt="" />
                     </div>
 
                 <div class="card-stacked">
@@ -27,7 +27,7 @@
                         <p><?php echo $get_single_product->product_short_description?></p> <br>
                         <p>Price: Rp.   <span><?php echo $this->cart->format_number($get_single_product->product_price)?> </span></p>
                         <p>Category: <span><?php echo $get_single_product->category_name?></span></p>
-                        <p>Brand:<span><?php echo $get_single_product->brand_name?></span></p>
+                        <p>Brand: <span><?php echo $get_single_product->brand_name?></span></p>
                     </div>
                     <div class="card-action red">
                         <div class="add-cart">

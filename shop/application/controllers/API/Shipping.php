@@ -8,7 +8,7 @@ class Shipping extends CI_Controller {
         
     }
 
-    public function cod()
+    public function gratis_ongkir()
     {
         $data['cart_contents'] = $this->cart->contents();
         $data['title']    = 'Bazar Mall';

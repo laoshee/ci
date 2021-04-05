@@ -267,9 +267,9 @@ class Customer extends CI_Controller {
         }
     }
 
-    public function payment($id_order)
+    public function payment()//$id_order)
     {
-        // $id_order = 'OR-2102-0003';
+        $id_order = 'OR-2103-0011';
         $id['customer_id']  = $this->session->userdata('customer_id');
         $get                = $this->session->userdata('customer_id');
         $data['bill']       = $this->web_model->customer_orderdetail($get,$id_order);

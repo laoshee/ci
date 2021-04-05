@@ -62,14 +62,14 @@ class Ongkir extends CI_Controller {
         $phone              = $this->input->post('customer_phone');
         $cart_contents      = $this->cart->contents();
 
-        if($code_error === 400 && $kurir != 'COD') {
+        if($code_error === 400 && $kurir != 'GO') {
             echo "<center><b>Pastikan data sudah di masukkan dengan benar, klik keluar untuk memastikan dan <i>input data</i></b></center>";
             // print_r($data);
             // var_dump($code_error);
             // print_r($code_error);
         // }elseif($code_error === 400 && $nama != '' && $address != ''&& $customer_provinsi != '' && $kota_tujuan != '' && $desa != ''&& $phone != '') {
         //     echo "<center><b>klik keluar untuk memastikan dan <i>input data</i></b></center>";
-        }elseif($kurir === 'COD'){
+        }elseif($kurir === 'GO'){
             echo "
                 <div class='card horizontal'>
                         <div class='card-stacked'>
@@ -82,14 +82,14 @@ class Ongkir extends CI_Controller {
                             echo '<table class="table table-striped table-bordered ">';
                 echo '<thead>';
                 echo '<tr>';
-                echo '<th>Nama Layanana</th>';
+                echo '<th>Nama Layanan</th>';
                 echo '<th>Tarif</th>';
                 echo '<th>Estimasi</th>';
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>';
                 echo "<tr>";
-                echo "<td> <div style='font:bold 16px Arial'> Cash On Delivery(COD) </div>";
+                echo "<td> <div style='font:bold 16px Arial'> Gratis Ongkir </div>";
                 echo "<td align='right'> Rp. 0.00";
                 echo "<td align='center'> Call (-) </td>";
                 echo "</tr>";
@@ -98,7 +98,7 @@ class Ongkir extends CI_Controller {
                 echo "</div> <br>" ;
 
                 echo "
-            <div class='col s6 m6 l6 offset-s6 offset-m6 offset-l6' style='border-style: dotted;border-color: red;'>
+            <div class='col m6 l6 offset-m6 offset-l6' style='border-style: dotted;border-color: red;'>
                 <table style='float:right;text-align:left;' width='40%'>
                     <tr>
                         <th>Biaya Barang: </th>
@@ -157,11 +157,11 @@ class Ongkir extends CI_Controller {
 
                     <div class='input-field col s12'>
                         Kurir:
-                        <input type='text' name='kurir' value='COD'>
+                        <input type='text' name='kurir' value='GO'>
                     </div>       
                     <div class='input-field col s12'>
                         Berat:
-                        <input type='text' name='berat_kg' value='". $berat ."' class=''>
+                        <input type='text' name='berat_kg' value='". $beratnya ."' class=''>
                     </div>      
                 </div>
 
@@ -290,7 +290,7 @@ class Ongkir extends CI_Controller {
         // echo '</table>';
         // foreach ($cart_contents as $cart_items) {
         echo "
-            <div class='col s6 m6 l6 offset-s6 offset-m6 offset-l6' style='border-style: dotted;border-color: red;'>
+            <div class='col m6 l6 offset-m6 offset-l6' style='border-style: dotted;border-color: red;'>
                 <table style='float:right;text-align:left;' width='40%'>
                     <tr>
                         <th>Biaya Barang: </th>
